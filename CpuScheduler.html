@@ -61,9 +61,6 @@
                         <option value="rr">Round Robin (RR)</option>
                         <option value="priority">Priority Scheduling - Non-preemptive</option>
                         <option value="priority_p">Priority Scheduling - Preemptive</option>
-                        <option value="ljf">Longest Job First (LJF) - Non-preemptive</option>
-                        <option value="lrtf">Longest Remaining Time First (LRTF) - Preemptive</option>
-                        <option value="hrrn">Highest Response Ratio Next (HRRN)</option>
                     </select>
                     
                     <div id="quantumInput" class="hidden mt-4">
@@ -1213,10 +1210,8 @@
                 'srtf': 'Shortest Remaining Time First (SRTF) - Preemptive',
                 'rr': 'Round Robin (RR)',
                 'priority': 'Priority Scheduling - Non-preemptive',
-                'priority_p': 'Priority Scheduling - Preemptive',
-                'ljf': 'Longest Job First (LJF) - Non-preemptive',
-                'lrtf': 'Longest Remaining Time First (LRTF) - Preemptive',
-                'hrrn': 'Highest Response Ratio Next (HRRN)'
+                'priority_p': 'Priority Scheduling - Preemptive'
+                
             };
             
             return algorithms[algorithmCode] || algorithmCode;
