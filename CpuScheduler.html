@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced CPU Scheduler Simulator</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-800 text-gray-200 p-6">
+    <div class="font-bold text-2xl w-10 h-10 flex gap-2"><img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Github-desktop-logo-symbol.svg/2048px-Github-desktop-logo-symbol.svg.png"
+            alt=""><a class="mt-1" href="">GitHub</a></div>
     <div class="max-w-5xl mx-auto bg-gray-700 p-6 rounded-lg shadow-lg">
         <h1 class="text-2xl font-bold font-sans mb-4 text-center">Advanced CPU Scheduler Simulator</h1>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Process Input Section -->
             <div class="bg-gray-600 p-4 rounded-lg">
@@ -17,38 +22,47 @@
                 <div class="grid grid-cols-3 gap-2">
                     <div>
                         <label class="block text-sm">Process ID:</label>
-                        <input type="text" id="processId" class="border p-2 w-full rounded text-gray-800" placeholder="P1">
+                        <input type="text" id="processId" class="border p-2 w-full rounded text-gray-800"
+                            placeholder="P1">
                     </div>
                     <div>
                         <label class="block text-sm">Arrival Time:</label>
-                        <input type="number" id="arrivalTime" min="0" class="border p-2 w-full rounded text-gray-800" placeholder="0">
+                        <input type="number" id="arrivalTime" min="0" class="border p-2 w-full rounded text-gray-800"
+                            placeholder="0">
                     </div>
                     <div>
                         <label class="block text-sm">Burst Time:</label>
-                        <input type="number" id="burstTime" min="1" class="border p-2 w-full rounded text-gray-800" placeholder="5">
+                        <input type="number" id="burstTime" min="1" class="border p-2 w-full rounded text-gray-800"
+                            placeholder="5">
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2 mt-2">
                     <div>
                         <label class="block text-sm">Priority (if applicable):</label>
-                        <input type="number" id="priority" min="1" class="border p-2 w-full rounded text-gray-800" placeholder="1">
+                        <input type="number" id="priority" min="1" class="border p-2 w-full rounded text-gray-800"
+                            placeholder="1">
                     </div>
                     <div>
                         <label class="block text-sm">Color (optional):</label>
                         <input type="color" id="processColor" class="border p-2 w-full rounded h-10" value="#3B82F6">
                     </div>
                 </div>
-                
+
                 <div class="flex space-x-2 mt-4">
-                    <button id="addProcessBtn" class="flex-1 bg-blue-500 text-white p-2 hover:bg-blue-600 duration-300 rounded">Add Process</button>
-                    <button id="resetBtn" class="bg-red-500 text-white p-2 hover:bg-red-600 duration-300 rounded px-4">Reset All</button>
+                    <button id="addProcessBtn"
+                        class="flex-1 bg-blue-500 text-white p-2 hover:bg-blue-600 duration-300 rounded">Add
+                        Process</button>
+                    <button id="resetBtn"
+                        class="bg-red-500 text-white p-2 hover:bg-red-600 duration-300 rounded px-4">Reset All</button>
                 </div>
-                
+
                 <div class="mt-4">
-                    <button id="generateRandomBtn" class="w-full bg-purple-500 text-white p-2 hover:bg-purple-600 duration-300 rounded">Generate Random Processes</button>
+                    <button id="generateRandomBtn"
+                        class="w-full bg-purple-500 text-white p-2 hover:bg-purple-600 duration-300 rounded">Generate
+                        Random Processes</button>
                 </div>
             </div>
-            
+
             <!-- Algorithm Selection -->
             <div class="bg-gray-600 p-4 rounded-lg">
                 <h2 class="text-xl font-semibold mb-4">Scheduling Configuration</h2>
@@ -62,24 +76,27 @@
                         <option value="priority">Priority Scheduling - Non-preemptive</option>
                         <option value="priority_p">Priority Scheduling - Preemptive</option>
                     </select>
-                    
+
                     <div id="quantumInput" class="hidden mt-4">
                         <label class="block">Time Quantum:</label>
-                        <input type="number" id="timeQuantum" min="1" value="2" class="border p-2 w-full rounded text-gray-800">
+                        <input type="number" id="timeQuantum" min="1" value="2"
+                            class="border p-2 w-full rounded text-gray-800">
                     </div>
-                    
+
                     <div class="mt-4">
                         <label class="flex items-center space-x-2">
                             <input type="checkbox" id="showSteps" class="rounded">
                             <span>Show execution steps</span>
                         </label>
                     </div>
-                    
-                    <button id="runSchedulerBtn" class="mt-4 w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 duration-300">Run Scheduler</button>
+
+                    <button id="runSchedulerBtn"
+                        class="mt-4 w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 duration-300">Run
+                        Scheduler</button>
                 </div>
             </div>
         </div>
-        
+
         <!-- Process Table -->
         <div class="mt-6 bg-gray-600 p-4 rounded-lg overflow-x-auto">
             <h2 class="text-xl font-semibold mb-4">Process List</h2>
@@ -97,24 +114,24 @@
                 <tbody id="processTable"></tbody>
             </table>
         </div>
-        
+
         <!-- Results Section -->
         <div id="resultsSection" class="mt-6 bg-gray-600 p-4 rounded-lg hidden">
             <h2 class="text-xl font-semibold mb-4">Scheduling Results</h2>
-            
+
             <!-- Gantt Chart -->
             <div class="mb-6">
                 <h3 class="text-lg font-semibold mb-2">Gantt Chart</h3>
                 <div id="ganttChart" class="bg-gray-800 p-4 rounded-lg overflow-x-auto"></div>
                 <div id="ganttTimeline" class="ml-10 text-sm overflow-x-auto"></div>
             </div>
-            
+
             <!-- Execution Steps -->
             <div id="executionStepsContainer" class="mb-6 hidden">
                 <h3 class="text-lg font-semibold mb-2">Execution Steps</h3>
                 <div id="executionSteps" class="bg-gray-800 p-4 rounded-lg max-h-60 overflow-y-auto"></div>
             </div>
-            
+
             <!-- Results Table -->
             <div>
                 <h3 class="text-lg font-semibold mb-2">Process Metrics</h3>
@@ -133,7 +150,7 @@
                     <tbody id="resultTable"></tbody>
                 </table>
             </div>
-            
+
             <!-- Summary Metrics -->
             <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div id="avgMetrics" class="bg-gray-800 p-4 rounded-lg">
@@ -149,4 +166,5 @@
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
